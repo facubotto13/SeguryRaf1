@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeguryRaf</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" href="imagenes/imagen noticia 1.png"> <!-- Reemplazar esto con el logo de SeguryRaf -->
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+        body {
+    font-family: 'Poppins', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    position: relative;
+    height: 50vh; /* Ocupa toda la altura de la pantalla */
+    overflow: hidden;
+}
+
+#background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.6; /* Opacidad del video */
+    z-index: 0; /* Asegura que el video esté detrás del texto */
+    height: 10rem;
+}
+
+.header h1 {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(0, 0, 0);
+    font-size: 3em;
+    text-align: center;
+    z-index: 1; /* Asegura que esté encima del video */
+    margin-top: -30px;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+p {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#noticias {
+    margin-top: -5rem;
+}
+
+/* Blog section */
+.blog-content {
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.blog-1 {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.blog-1:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.blog-1 img {
+    width: 100%; /* O puedes usar un ancho fijo, por ejemplo, width: 300px; */
+    height: 300px; /* Ajusta la altura fija según tus necesidades */
+    object-fit: cover; /* Mantiene la proporción y recorta lo necesario */
+    border-bottom: 1px solid #ccc;
+}
+
+.blog-txt {
+    padding: 1.3rem;
+    text-align: center;
+}
+.blog-1 .mas {
+  width: 10%;
+  height: auto;
+  float: right;
+  border-bottom: 0px solid #ccc;
+  
+}
+
+
+.blog-txt p {
+    font-size: 1.1em; /* Aumenta el tamaño de la letra */
+    color: #4C87C1;
+    font-weight: bold; /* Hace que la letra sea más gruesa */
+    font-family: 'Poppins', Arial, sans-serif;
+}
+
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn-4 {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-4:hover {
+    background-color: #0056b3;
+}
+
+.close{
+    color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* Estilos para el modal */
+.modal {
+    display: none; /* Ocultar el modal por defecto */
+    position: fixed; /* Mantener el modal fijo en la pantalla */
+    z-index: 10000; /* Asegurar que el modal esté por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Permitir scroll si el contenido es grande */
+    background-color: rgba(0,0,0,0.7); /* Fondo semi-transparente */
+}
+
+.modal-content {
+    overflow: hidden; /* Limpia el float */
+    background-color: white;
+    margin: 5% auto; /* Centrar el modal */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 85%; /* 85% del ancho de la pantalla */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.4s; /* Animación de entrada */
+    border-radius: 2rem;
+    text-align: center; /* Centra el contenido en el modal */
+}
+
+.modal-content img {
+    margin-right: 10px;
+    width: 40%;
+    height: auto;
+    transition: opacity 0.3s ease;
+    border-radius: 2rem;
+    box-shadow: 0px 0px 0.2rem rgba(0, 0, 0, 0.5);
+    display: inline-block; /* Para centrado vertical */
+    vertical-align: middle; /* Centrado vertical */
+}
+
+.modal-content .text-content {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    width: 60%; /* Ajustar según sea necesario */
+}
+
+
+
+.modal p {
+    text-align: justify;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  bottom: 1rem;
+}
+
+/* Contenedor del cuerpo del modal */
+.modal-body {
+    display: flex;
+    align-items: flex-start;
+}
+
+
+.modal-text {
+    flex: 1; /* El texto ocupa el resto del espacio disponible */
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+p{
+    margin-bottom: 0px;
+}
+
+
+/* Estilos del footer */
+.footer {
+    background-color: #d1d0d0; /* Fondo oscuro */
+    color: #000000; /* Texto blanco */
+    padding: 20px;
+    text-align: center; /* Centra el contenido del footer */
+    margin-top: 20px; /* Espacio superior */
+}
+
+.footer h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.linkredes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Espacio entre los iconos */
+    margin-bottom: 20px;
+}
+
+.linkredes a img {
+    width: 40px;  /* Ajusta el tamaño según tus necesidades */
+    height: 40px; /* Ajusta el tamaño según tus necesidades */
+    object-fit: contain;
+}
+
+.linkredes a {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Transición suave para transformaciones y opacidad */
+}
+
+.linkredes a:hover {
+    transform: scale(1.2); /* Efecto de zoom al pasar el mouse */
+    opacity: 0.8; /* Reduce la opacidad al pasar el mouse */
+}
+
+.footer-txt {
+    text-align: center; /* Centra el contenido */
+    color: #000000; /* Color del texto blanco */
+    padding: 20px; /* Relleno alrededor del contenido */
+}
+
+.footer-txt p {
+    margin: 0; /* Elimina el margen predeterminado del párrafo */
+    font-size: 0.9em; /* Ajusta el tamaño del texto */
+    line-height: 1.5; /* Ajusta el espacio entre líneas */
+}
+
+.footer-txt hr {
+    border: none; /* Elimina el borde predeterminado de la línea horizontal */
+    height: 1px; /* Altura de la línea */
+    background-color: #000000; /* Color de la línea */
+    width: 60%; /* Anchura de la línea */
+}
+
+/* Estilos del botón de WhatsApp */
+.btn-wsp {
+    display: inline-block;
+    padding: 10px;
+}
+
+.btn-wsp img {
+    width: 90px; /* Tamaño de la imagen */
+    height: 90px;
+    display: block; /* Para evitar que la imagen tenga un espacio inferior no deseado */
+}
+
+.btn-wsp:hover {
+    transform: scale(1.1); /* Efecto de zoom al pasar el mouse */
+}
+
+/* Posicionamiento fijo en la esquina inferior derecha */
+.btn-wsp {
+    position: fixed;
+    bottom: 20px; /* Espacio desde la parte inferior */
+    right: 20px; /* Espacio desde la parte derecha */
+    z-index: 1000; /* Asegura que el botón esté por encima de otros elementos */
+}
+
+/* Estilos del menú */
+.menu.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: fixed; /* Para mantener el menú fijo en la parte superior */
+    top: 0;
+    left: 0;
+    background-color: transparent; /* Fondo transparente por defecto */
+    transition: background-color 0.3s; /* Transición suave para el cambio de fondo */
+    z-index: 1000; /* Asegura que el menú esté por encima de otros elementos */
+}
+
+/* Clase que se añadirá al hacer scroll */
+.menu.container.scrolled {
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para distinguir el menú */
+    height: 4.1rem;
+}
+
+.logo img {
+    height: 50px; /* Ajusta la altura del logo */
+}
+
+/* Estilos del checkbox y label para el menú responsive */
+#menu {
+    display: none;
+}
+
+.no_display_en_desk {
+    display: none;
+}
+
+.menu img.menu {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 1500;
+    position:relative;
+}
+
+/* Estilos del navbar */
+.navbar {
+    display: flex;
+    width: 100%;
+}
+
+.navbar ul {
+  width: 80%;
+  justify-content: end;
+  align-items: center;
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+}
+
+/* Asegúrate de que los enlaces de navegación estén estilizados */
+.navbar a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+    padding: 10px;
+    transition: background 0.3s;
+    line-height: 1;
+    display: inline-flex;
+        text-align: center;
+    }
+
+
+
+.navbar .logo-cabeza{
+    width: 6rem;
+    height: auto;
+    padding: 0.5rem;
+}
+
+/* Estilos para el formulario dentro del modal */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 96%; /* Ajuste para el padding */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+
+button[type="submit"] {
+    background-color: #1786C3;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 5rem;
+    width: 20rem;
+    margin-top: 1rem;
+    margin-left: 5rem;
+    font-size: 20px;
+}
+
+button[type="submit"]:hover {
+    background-color: #0d3d57;
+}
+
+/*MODAL FORMULARIO*/
+.modal_form {
+    display: none;
+    position: fixed;
+    z-index: 100000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Evita el desplazamiento de la página principal cuando el modal está abierto */
+    background-color: rgba(0, 0, 0, 0.9);
+    padding-top: 60px;
+}
+
+.modal_form-content {
+    background-color: #fefefe;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    max-height: 90%; /* Ajusta según sea necesario */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.9);
+    position: fixed;
+    top: 10px; /* Ajusta según sea necesario */
+    left: 50%;
+    transform: translateX(-50%);
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+}
+
+/* Estilos para la barra de desplazamiento */
+.modal_form-content::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra de desplazamiento */
+    
+}
+
+.modal_form-content::-webkit-scrollbar-track {
+    background: #858383; /* Color de fondo de la pista de desplazamiento */
+}
+
+.modal_form-content::-webkit-scrollbar-thumb {
+    background: #007bff; /* Color de la barra de desplazamiento */
+    border-radius: 10px; /* Redondear las esquinas de la barra de desplazamiento */
+}
+
+.modal_form-content::-webkit-scrollbar-thumb:hover {
+    background: #007bff; /* Color de la barra de desplazamiento cuando se pasa el cursor por encima */
+}
+
+/* Ocultar las flechas de desplazamiento */
+.modal_form-content::-webkit-scrollbar-button {
+    display: none;
+}
+
+
+
+.modal_form label{
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: left;
+}
+.custom-line {
+    border: none;
+    height: 2px;
+    background-color: #000;
+    margin: 10px 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+.close-form{
+    color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-form:hover{
+    color: #000000;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-message {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en pantalla */
+    z-index: 9999; /* Siempre encima */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    background-color: rgba(0, 0, 0, 0); /* Fondo semi-transparente */
+    display: flex; /* Usar flexbox para centrar contenido */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.modal-message-content {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.85);
+    border-radius: 2rem;
+    text-align: center; /* Centra el texto */
+    position: relative; /* Para que el botón de cerrar se posicione correctamente */
+    left: 5%;
+    margin-top: 40px;
+}
+
+.close-message-modal {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 45px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-message-modal:hover,
+.close-message-modal:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-message-content img {
+    display: block; /* Asegura que la imagen se muestre como bloque */
+    margin: 20px auto 0; /* Margen superior para separación, centrado horizontalmente */
+    max-width: 100%; /* Se ajusta al ancho del contenedor */
+    height: auto; /* Mantiene la relación de aspecto */
+}
+
+
+.modal p.p_form {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 25px;
+}
+
+
+
+
+/* Media query para pantallas de ancho máximo 991px */
+@media (max-width: 991px) {
+    #background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.6; /* Opacidad del video */
+    z-index: 0; /* Asegura que el video esté detrás del texto */
+    height: 6.5rem;
+}
+.menu {
+        height: 1.2rem;
+    }
+    .menu.container.scrolled {
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 1.2rem;
+}
+.menu label {
+        display: initial;
+    }
+    .menu img.menu {
+        width: 50px; /* Ancho ajustado para dispositivos móviles */
+        height: auto; /* Altura automática */
+        margin-left: -1.2rem;
+        margin-top: 0.4rem;
+    }
+    .menu.container.scrolled img.menu{
+        width: 50px; /* Ancho ajustado para dispositivos móviles */
+        height: auto; /* Altura automática */
+        margin-left: -1.2rem;
+        margin-top: 0.4rem;
+    }
+    .menu .navbar {
+    position: fixed;
+    flex-direction: column;
+    top: 0;
+    left: -100%; /* Inicialmente fuera de la pantalla a la izquierda */
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: left 0.5s ease;
+    z-index: 1000;
+}
+
+    #menu:checked ~ .navbar {
+        left: 0; /* Muestra el menú desplazándolo desde la izquierda */
+    }
+
+    .navbar ul {
+        flex-direction: column; /* Alinea los elementos del menú en columna */
+        margin-top: 20px; /* Espacio superior */
+        padding: 0;
+        text-align: center;
+    }
+    .navbar a{
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 0.3s;
+    line-height: 1;
+    width: 8rem;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+    .navbar img {
+    display: block; /* Asegura que la imagen se comporte como un bloque */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+    max-width: 100%; /* Ajusta el tamaño máximo de la imagen */
+    height: auto; /* Ajusta la altura automáticamente para mantener la proporción */
+    }
+
+    .menu .navbar ul {
+        list-style-type: none; /* Quita los estilos de lista */
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+
+    .menu .navbar ul li {
+        width: 100%; /* Ancho completo del elemento de lista */
+        text-align: center; /* Centra el texto dentro de los elementos de lista */
+    }
+
+    .menu .navbar ul li a {
+        display:inline-block;
+        text-decoration: none;
+        color: #fff;
+        transition: background-color 0.3s;
+        line-height: 1; /* Ajustar line-height al tamaño del texto */
+        padding: 0.5rem;
+    }
+
+    .menu .navbar ul li a:hover {
+        background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente al pasar el mouse */
+    }
+
+    .menu .navbar a:active {
+        color: #ffffff; /* Color del texto activo */
+    }
+    .logo {
+        display: none;
+    }
+    #noticias {
+    margin-top: -10rem;
+}
+    .header {
+        min-height: 45vh;
+    }
+    .header-content {
+        
+        flex-direction: column;
+        text-align: center;
+    }
+    .header-txt {
+        margin-bottom: 25px;
+        
+    }
+    .header-txt h1{
+        margin: 0px;
+        
+    }
+    .header-txt span{
+        margin: 0px; 
+    }
+
+    .header h1 {
+        text-align: center;
+        margin-top: -8rem;
+    }
+
+    .story-section {
+        flex-direction: column; /* Cambia a una disposición de columna en pantallas más pequeñas */
+        align-items: center; /* Centra los elementos */
+        margin-top: -160px;
+    }
+
+    .story-image,
+    .story-text {
+        max-width: 100%; /* Asegura que ambos elementos ocupen todo el ancho disponible */
+        margin-bottom: 20px; /* Añade espacio entre los elementos */
+    }
+
+    .story-text {
+        padding: 15px; /* Ajusta el padding del texto */
+    }
+
+    .story-text h2 {
+        font-size: 1.3em; /* Reduce el tamaño del título */
+    }
+
+    .story-text p {
+        font-size: 0.9em; /* Reduce el tamaño del texto */
+    }
+
+    .footer {
+        padding: 15px; /* Ajusta el padding del footer */
+    }
+
+    .footer h2 {
+        font-size: 1.5em; /* Reduce el tamaño del título */
+    }
+
+    .linkredes {
+        margin-bottom: 15px; /* Reduce el margen inferior */
+    }
+
+    .linkredes a {
+        width: 24px; /* Reduce el tamaño de los iconos de redes sociales */
+        height: 24px;
+    }
+
+    .footer-txt p {
+        font-size: 0.8em; /* Reduce el tamaño del texto */
+    }
+
+    .footer-txt hr {
+        width: 40%; /* Reduce la anchura de la línea horizontal */
+    }
+
+    .btn-wsp {
+        bottom: 10px; /* Reduce el espacio desde la parte inferior */
+        right: 10px; /* Reduce el espacio desde la parte derecha */
+        padding: 8px; /* Ajusta el padding del botón */
+        z-index: 500;
+    }
+
+    .btn-wsp img {
+        width: 80px; /* Reduce el tamaño de la imagen */
+        height: 80px;
+    }
+    
+p {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-family: 'Poppins', Arial, sans-serif;
+}
+
+.btn-4 {
+  border-radius: 5px;
+  margin-left: 50%;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+    
+
+    .blog-txt {
+        padding: 1rem;
+    }
+
+    .blog-1 {
+        margin-bottom: 15px;
+    }
+
+    .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 10px;
+    border: 1px solid #888;
+    width: 90%;
+    height: auto;
+    border-radius: 2rem;
+}
+
+    .modal-body {
+        flex-direction: column; /* En modo móvil, coloca la imagen y el texto en columna */
+        align-items: center; /* Alinear elementos al centro en móvil */
+    }
+    .modal-content img {
+        float: left;
+        margin-right: 10px;
+        width: 100%;
+        height: auto;
+        transition: opacity 0.3s ease;
+        border-radius: 2rem;
+        box-shadow: 0px 0px 0.2rem rgba(0, 0, 0, 0.9);
+        margin-bottom: 1rem;
+}
+
+    .modal-body img {
+        width: 100%; /* Imagen toma el ancho completo en móvil */
+        margin-right: 0; /* Eliminar margen derecho en móvil */
+        margin-bottom: 20px; /* Espacio entre la imagen y el texto en móvil */
+    }
+
+    .close {
+    color: #000000;
+    position: absolute; /* Posicionar de manera absoluta dentro del contenedor del modal */
+    top: 20px;
+    right: 1rem;
+    margin-right: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close-form{
+     color: #000000;
+    position: absolute; /* Posicionar de manera absoluta dentro del contenedor del modal */
+    top: -2px;
+    right: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button[type="submit"] {
+    background-color: #1786C3;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 5rem;
+    width: 15rem;
+    margin-top: 1rem;
+    margin-left: 2.5rem;
+    font-size: 20px;
+}
+
+button[type="submit"]:hover {
+    background-color: #0d3d57;
+}
+
+
+}   
+@media only screen and (min-width: 1920px) {
+    .header h1 {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(0, 0, 0);
+  font-size: 3em;
+  text-align: center;
+  z-index: 1;
+}
+
+#noticias {
+  margin-top: -200px;
+}
+}  
+
+
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <video autoplay muted loop id="background-video">
+            <source src="imagenes/Agregar texto.mp4" type="video/mp4">
+            Tu navegador no soporta la reproducción de video.
+        </video>
+        <h1>Nuestros Servicios</h1>
+    </div>
+    <div class="menu container">
+        <input type="checkbox" id="menu">
+        <label for="menu" class="no_display_en_desk">
+            <img src="imagenes/logo.webp" class="menu" alt="Manú">
+        </label>
+        <nav class="navbar">
+            <a href="index.html">
+                <img src="imagenes/Logo-removebg-preview.png" class="logo-cabeza" alt="Logo">
+            </a>  
+            <ul>
+                <li><a href="index.html#noticias" onclick="closeMenu()"> Noticias</a></li>
+                <li><a href="historia.html" onclick="closeMenu()"> Historia</a></li>
+                <li><a href="servicios.html" onclick="closeMenu()"> Servicios</a></li>
+                <li><a href="contactoDirecto.html" onclick="closeMenu()"> Contacto</a></li>
+                <li><a href="clientes.html" onclick="closeMenu()">Clientes</a></li>
+            </ul>
+        </nav>
+    </div>
+    <section class="blog container" id="noticias">
+        <p>
+            Elegí la mejor atención y asesoramiento para lo que necesites.
+        </p>
+        <div class="blog-content">
+            <!-- Blog 1 -->
+<div class="blog-1" onclick="openModal('modal1')">
+    <img src="imagenes/seguridad empresarial.jpg" alt="">
+    <div class="blog-txt">
+        <p>Seguridad empresarial</p>
+        <img src="imagenes/mas.png" class="mas">
+    </div>
+</div>
+
+<!-- Modal 1 -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal1')">&times;</span>
+        <h2 class="modal-title">Seguridad empresarial</h2>
+        <hr class="custom-line">
+        <div class="modal-body">
+            <img src="imagenes/seguridad empresarial.jpg" alt="Seguridad Empresarial" class="modal-image">
+            <div class="modal-text">
+                <p>La seguridad empresarial es un conjunto de estrategias y medidas diseñadas para proteger los activos, la información y las personas dentro de una organización.</p>
+                <p>Este ámbito incluye la implementación de sistemas de vigilancia, control de accesos y protocolos de emergencia, con el objetivo de prevenir y mitigar riesgos tanto internos como externos.</p>
+                <p>A través de una combinación de tecnología avanzada y prácticas operativas efectivas, la seguridad empresarial busca crear un entorno seguro y confiable que permita a las empresas operar de manera eficiente y sin interrupciones.</p>
+            </div>
+        </div>
+        <hr class="custom-line">
+        <div class="button-container">
+            <button class="btn-4" onclick="openModal('modalForm1')">Solicitar presupuesto</button>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal Formulario 1 -->
+<div id="modalForm1" class="modal">
+    <div class="modal_form-content">
+        <span class="close-form" onclick="closeModal('modalForm1')">&times;</span>
+        <h2>Seguridad empresarial</h2>
+        <hr class="custom-line">
+        <form action="https://formspree.io/f/manwdpoq" method="post" enctype="multipart/form-data" class="form">
+            <div class="form-group">
+                <label for="name">Nombre completo:</label>
+            <input type="text" id="name" name="name" pattern="[A-Za-z\s]+" title="Solo letras permitidas" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Teléfono:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="service">Servicio deseado:</label>
+                <select id="service" name="service" required>
+                    <option value="">Seleccione un servicio</option>
+                    <option value="seguridad_eventos" selected>Seguridad empresarial</option>
+                    <option value="instalacion_camaras">Instalación de cámaras de seguridad</option>
+                    <option value="limpieza">Servicio de limpieza</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Mensaje adicional:</label>
+                <textarea id="message" name="message" rows="5"></textarea>
+            </div>
+            <button type="submit">Enviar solicitud</button>
+        </form>
+        <div id="message-modal" class="modal-message" style="display:none;">
+            <div class="modal-message-content">
+                <span class="close-message-modal">&times;</span>
+                <p class="p_form" id="form-message"></p>
+                <img id="success-image" src="imagenes/Logo-removebg-preview.png" alt="Success" style="display:none; max-width: 100%; height: auto;">
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- Blog 2 -->
+        <div class="blog-1" onclick="openModal('modal2')">
+            <img src="imagenes/instalacion camaras.jpeg" alt="">
+                <div class="blog-txt">
+                <p>Instalación de cámaras de seguridad</p>
+                <img src="imagenes/mas.png" class="mas">
+                </div>
+    </div>
+
+        <!-- Modal 2 -->
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal2')">&times;</span>
+                <h2 class="modal-tittle">Instalación de camaras de seguridad</h2>
+                <hr class="custom-line">
+                <div class="modal-body">    
+                    <img src="imagenes/instalacion camaras.jpeg" alt="Instalacion de camaras de seguridad" class="modal-image">
+                    <div class="modal-text">
+                        <p>La instalación de cámaras de seguridad es una medida esencial para garantizar la vigilancia y protección continuas en cualquier entorno empresarial o residencial.</p>
+                        <p>Estas cámaras, equipadas con tecnología avanzada, permiten monitorear en tiempo real y registrar actividades, ofreciendo una capa adicional de seguridad contra robos, vandalismo y otros incidentes.</p>
+                        <p>El proceso de instalación implica un análisis detallado de las áreas a cubrir, la selección de equipos adecuados y la configuración de sistemas que aseguren una visualización clara y almacenamiento seguro de las grabaciones.</p>
+                        <p>Con una instalación profesional, se maximiza la eficiencia de la vigilancia, proporcionando a los usuarios tranquilidad y control sobre la seguridad de sus instalaciones</p>
+                    </div>
+                </div>
+                <hr class="custom-line">
+                <div class="button-container">
+                    <button class="btn-4" onclick="openModal('modalForm2')">Solicitar presupuesto</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Formulario 2 -->
+        <div id="modalForm2" class="modal">
+            <div class="modal_form-content">
+                <span class="close-form" onclick="closeModal('modalForm2')">&times;</span>
+                <h2>Instalación de camaras de seguridad</h2>
+                <hr class="custom-line">
+                <form action="https://formspree.io/f/manwdpoq" method="post" enctype="multipart/form-data" class="form">
+                    <div class="form-group">
+                        <label for="name">Nombre completo:</label>
+                        <input type="text" id="name" name="name" pattern="[A-Za-z\s]+" title="Solo letras permitidas" required>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo electrónico:</label>
+                        <input type="email" id="email" name="email" required>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono:</label>
+                        <input type="tel" id="phone" name="phone" required>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Servicio deseado:</label>
+                        <select id="service" name="service" required>
+                            <option value="">Seleccione un servicio</option>
+                            <option value="seguridad_eventos">Seguridad empresarial</option>
+                            <option value="instalacion_camaras" selected>Instalación de cámaras de seguridad</option>
+                            <option value="limpieza">Servicio de limpieza</option>
+                        </select>
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje adicional:</label>
+                        <textarea id="message" name="message" rows="5"></textarea>
+                    </div>
+                    <button type="submit">Enviar solicitud</button>
+                </form>
+                <div id="message-modal" class="modal-message" style="display:none;">
+                    <div class="modal-message-content">
+                        <span class="close-message-modal">&times;</span>
+                        <p class="p_form" id="form-message"></p>
+                        <img id="success-image" src="imagenes/Logo-removebg-preview.png" alt="Success" style="display:none; max-width: 100%; height: auto;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blog 3 -->
+        <div class="blog-1" onclick="openModal('modal3')">
+            <img src="imagenes/servicio limpieza.jpg" alt="">
+                <div class="blog-txt">
+                <p>Servicio de limpieza</p>
+                <img src="imagenes/mas.png" class="mas">
+                </div>
+    </div>
+
+        <!-- Modal 3 -->
+        <div id="modal3" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal3')">&times;</span>
+                <h2 class="modal-title">Servicio de limpieza</h2>
+                <hr class="custom-line">
+                <div class="modal-body">
+                    <img src="imagenes/servicio limpieza.jpg" alt="Servicio de limpieza" class="modal-image">
+                    <div class="modal-text">
+                        <p>El servicio de limpieza profesional es fundamental para garantizar que los espacios empresariales y residenciales se mantengan impecables y saludables.</p>
+                        <p>Este servicio abarca desde la limpieza regular de oficinas, áreas comunes y baños, hasta la desinfección profunda y especializada de superficies y equipos, incluyendo terminaciones de obras y reformas.</p>
+                        <p>Además, un entorno limpio y ordenado no solo mejora la apariencia del lugar, sino que también contribuye a la productividad y bienestar de los empleados y visitantes.</p>
+                        <p>Con un servicio de limpieza profesional, se asegura un estándar constante de higiene y presentación, adaptado a las necesidades específicas de cada cliente.</p>
+                    </div>
+                </div>
+                <hr class="custom-line">
+                <div class="button-container">
+                    <button class="btn-4" onclick="openModal('modalForm3')">Solicitar presupuesto</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Formulario 3 -->
+<div id="modalForm3" class="modal">
+    <div class="modal_form-content">
+        <span class="close-form" onclick="closeModal('modalForm3')">&times;</span>
+        <h2>Servicio de Limpieza</h2>
+        <hr class="custom-line">
+        <form action="https://formspree.io/f/manwdpoq" method="post" enctype="multipart/form-data" class="form">
+            <div class="form-group">
+                <label for="name">Nombre completo:</label>
+                <input type="text" id="name" name="name" pattern="[A-Za-z\s]+" title="Solo letras permitidas" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Teléfono:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="service">Servicio deseado:</label>
+                <select id="service" name="service" required>
+                    <option value="">Seleccione un servicio</option>
+                    <option value="seguridad_eventos" >Seguridad empresarial</option>
+                    <option value="instalacion_camaras">Instalación de cámaras de seguridad</option>
+                    <option value="limpieza" selected>Servicio de limpieza</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Mensaje adicional:</label>
+                <textarea id="message" name="message" rows="5"></textarea>
+            </div>
+            <button type="submit">Enviar solicitud</button>
+        </form>
+        <div id="message-modal" class="modal-message" style="display:none;">
+            <div class="modal-message-content">
+                <span class="close-message-modal">&times;</span>
+                <p class="p_form" id="form-message"></p>
+                <img id="success-image" src="imagenes/Logo-removebg-preview.png" alt="Success" style="display:none; max-width: 100%; height: auto;">
+            </div>
+        </div>
+    </div>
+</div>
+
+            
+        </div>
+    </section>
+
+    <footer class="footer container" id="contacto">
+        <h2>Nuestras redes</h2>
+        <div class="linkredes">
+            <a href="https://www.facebook.com/seguryrafsrl?mibextid=ZbWKwL" class="ig" target="_blank"> <img src="imagenes/logo facebook.png" alt=""></a> 
+            <a href="https://www.instagram.com/seguryrafsrl?igsh=ejYweXl1aDE1YnB3" class="fb" target="_blank"> <img src="imagenes/logo instagram.png" alt=""></a> 
+            <a href="https://www.linkedin.com/in/seguryraf-srl-77a606320/" class="twt" target="_blank"> <img src="imagenes/logo linkedin.png" alt=""></a> 
+        </div>
+
+        <div class="footer-txt">
+            <p>
+                <hr>
+                Copyright 2024 © - SolBot - Diseño y Desarrollo Web
+            </p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/543492681340" class="btn-wsp" target="_blank">
+        <img src="imagenes/wpp.webp" alt="WhatsApp">
+    </a>
+    <script src="js/menu.js"></script> <!-- Asegúrate de enlazar tu archivo JavaScript -->
+    <script>
+   
+   document.querySelectorAll('.form').forEach((form) => {
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        let isValid = true;
+        const formData = new FormData(this);
+        const action = this.action;
+        let firstInvalidField = null;
+
+        // Limpiar mensajes de error previos
+        this.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+
+        // Validación básica de campos
+        this.querySelectorAll('input, textarea, select').forEach(input => {
+            if (input.required && !input.value.trim()) {
+                const errorElement = input.nextElementSibling;
+                errorElement.textContent = 'Este campo es obligatorio.';
+                errorElement.style.color = 'red';
+                isValid = false;
+
+                // Guardar la referencia del primer campo inválido
+                if (!firstInvalidField) {
+                    firstInvalidField = input;
+                }
+            }
+        });
+
+        if (!isValid) {
+            const formMessage = this.parentNode.querySelector('.modal-message #form-message');
+            formMessage.textContent = `Hay errores en el campo: ${firstInvalidField.previousElementSibling.textContent}. Por favor, corrígelos e inténtalo de nuevo.`;
+            this.parentNode.querySelector('.modal-message').style.display = 'block';
+
+            // Enfocar el primer campo inválido
+            firstInvalidField.focus();
+            return;
+        }
+
+        try {
+            const response = await fetch(action, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            let message = '';
+            const modalMessage = this.parentNode.querySelector('.modal-message');
+            const formMessage = modalMessage.querySelector('#form-message');
+            const successImage = modalMessage.querySelector('#success-image');
+
+            if (response.ok) {
+                message = "Formulario enviado con éxito.";
+                this.reset();  // Resetea los campos del formulario
+                successImage.style.display = 'block';
+            } else {
+                message = "Hubo un problema al enviar el formulario.";
+                successImage.style.display = 'none';
+            }
+
+            formMessage.textContent = message;
+            modalMessage.style.display = 'block';
+        } catch (error) {
+            console.error("Error al enviar el formulario:", error);
+        }
+    });
+});
+
+
+    </script>
+
+</body>
+</html>

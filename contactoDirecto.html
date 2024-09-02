@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeguryRaf</title>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqzDBIC08BNNTq7MNyk-eINcYEiqhw1_g&callback=console.debug&libraries=maps,marker&v=beta"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" href="imagenes/imagen noticia 1.png"> <!-- Reemplazar esto con el logo de SeguryRaf -->
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+        body {
+    font-family: 'Poppins', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+/* Establecer siempre la altura del mapa explícitamente para definir el tamaño del div
+ *elemento que contiene el mapa. */
+.text {
+    width: 50%;
+    padding: 20px; /* Ajusta el padding según tus necesidades */
+}
+
+/* Opcional: Hace que la página de muestra llene la ventana. */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.container-map .text {
+    background-color: #f2f2f2; /* Fondo gris más claro */
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.header {
+    position: relative;
+    height: 50vh; /* Ocupa toda la altura de la pantalla */
+    margin-bottom: 6rem;
+    
+}
+
+#background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.6; /* Opacidad del video */
+    z-index: 0; /* Asegura que el video esté detrás del texto */
+    height: 10rem;
+
+}
+
+.header h1 {
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(0, 0, 0);
+    font-size: 3em;
+    text-align: center;
+    z-index: 1; /* Asegura que esté encima del video */
+    margin-top: -50px;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.container-map {
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3em;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #4C87C1;
+}
+
+p {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.container-map .text {
+    text-align: center;
+}
+
+/* Estilos para el contenedor del formulario */
+.contact-form-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.contact-form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2em;
+    color: #333;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.contact-form-container h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background-color: #4C87C1;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: calc(100% - 0px); /* Ajuste para el padding */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+button[type="submit"] {
+    background-color: #1786C3;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+button[type="submit"]:hover {
+    background-color: #0d3d57;
+}
+
+/* Estilos del footer */
+.footer {
+    background-color: #d1d0d0; /* Fondo oscuro */
+    color: #000000; /* Texto blanco */
+    padding: 20px;
+    text-align: center; /* Centra el contenido del footer */
+    margin-top: 20px; /* Espacio superior */
+}
+
+.footer h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.linkredes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Espacio entre los iconos */
+    margin-bottom: 20px;
+}
+
+.linkredes a img {
+    width: 40px;  /* Ajusta el tamaño según tus necesidades */
+    height: 40px; /* Ajusta el tamaño según tus necesidades */
+    object-fit: contain;
+}
+
+.linkredes a {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Transición suave para transformaciones y opacidad */
+}
+
+.linkredes a:hover {
+    transform: scale(1.2); /* Efecto de zoom al pasar el mouse */
+    opacity: 0.8; /* Reduce la opacidad al pasar el mouse */
+}
+
+.footer-txt {
+    text-align: center; /* Centra el contenido */
+    color: #000000; /* Color del texto blanco */
+    padding: 20px; /* Relleno alrededor del contenido */
+}
+
+.footer-txt p {
+    margin: 0; /* Elimina el margen predeterminado del párrafo */
+    font-size: 0.9em; /* Ajusta el tamaño del texto */
+    line-height: 1.5; /* Ajusta el espacio entre líneas */
+}
+
+.footer-txt hr {
+    border: none; /* Elimina el borde predeterminado de la línea horizontal */
+    height: 1px; /* Altura de la línea */
+    background-color: #000000; /* Color de la línea */
+    width: 60%; /* Anchura de la línea */
+}
+
+/* Estilos del botón de WhatsApp */
+
+
+.btn-wsp img {
+    width: 90px; /* Tamaño de la imagen */
+    height: 90px;
+    display: block; /* Para evitar que la imagen tenga un espacio inferior no deseado */
+}
+
+.btn-wsp:hover {
+    transform: scale(1.1); /* Efecto de zoom al pasar el mouse */
+}
+
+/* Posicionamiento fijo en la esquina inferior derecha */
+.btn-wsp {
+    position: fixed;
+    bottom: 20px; /* Espacio desde la parte inferior */
+    right: 20px; /* Espacio desde la parte derecha */
+    z-index: 500; /* Asegura que el botón esté por encima de otros elementos */
+}
+
+/* Estilos del menú */
+.menu.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: fixed; /* Para mantener el menú fijo en la parte superior */
+    top: 0;
+    left: 0;
+    background-color: transparent; /* Fondo transparente por defecto */
+    transition: background-color 0.3s; /* Transición suave para el cambio de fondo */
+    z-index: 1000; /* Asegura que el menú esté por encima de otros elementos */
+}
+
+/* Clase que se añadirá al hacer scroll */
+.menu.container.scrolled {
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para distinguir el menú */
+    height: 4.1rem;
+}
+
+.logo img {
+    height: 50px; /* Ajusta la altura del logo */
+}
+
+/* Estilos del checkbox y label para el menú responsive */
+#menu {
+    display: none;
+}
+
+#map{
+    width: 50%;
+    height: 500px; /* Ajusta la altura según tus necesidades */
+}
+
+.no_display_en_desk {
+    display: none;
+}
+
+.menu img.menu {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 1500;
+    position:relative;
+}
+
+/* Estilos del navbar */
+.navbar {
+    display: flex;
+    width: 100%;
+}
+
+.navbar ul {
+  width: 80%;
+  justify-content: end;
+  align-items: center;
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+}
+
+/* Asegúrate de que los enlaces de navegación estén estilizados */
+.navbar a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+    padding: 10px;
+    transition: background 0.3s;
+    line-height: 1;
+    display: inline-flex;
+        text-align: center;
+    }
+
+
+.navbar .logo-cabeza{
+    width: 6rem;
+    height: auto;
+    padding: 0.5rem;
+}
+
+.text h2{
+    text-decoration: underline;
+}
+
+.botonera {
+    margin-top: -150px;
+    text-align: center;
+}
+.botonera button{
+    height: 5rem;
+    width: 15rem;
+    margin-top: 1rem;
+}
+
+
+ /* Estilos para el botón */
+        #contacto-Contratar {
+        font-size: 25px;
+        background-color: #007bff;
+        color: white;
+        border: 1px solid #0056b3;
+        border-bottom-width: 1px;
+        border-bottom-width: 4px;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        width: 20rem;
+        }
+        
+        #contacto-Otro {
+        font-size: 25px;
+        background-color: #007bff;
+        color: white;
+        border: 1px solid #0056b3;
+        border-bottom-width: 1px;
+        border-bottom-width: 4px;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        width: 20rem;
+        }
+        #contacto-Otro2 {
+        font-size: 25px;
+        background-color: #007bff;
+        color: white;
+        border: 1px solid #0056b3;
+        border-bottom-width: 1px;
+        border-bottom-width: 4px;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        width: 20rem;
+        }
+        #contacto-Contratar:hover {
+        transform: translateY(10px); /* Efecto de elevación */
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el mouse */
+        }
+        #contacto-Otro:hover {
+        transform: translateY(10px); /* Efecto de elevación */
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el mouse */
+        }
+        #contacto-Otro2:hover {
+        transform: translateY(10px); /* Efecto de elevación */
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el mouse */
+        }
+        /* Estilos para el modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Evita el desplazamiento de la página principal cuando el modal está abierto */
+    background-color: rgba(0, 0, 0, 0.7);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    max-height: 90%; /* Ajusta según sea necesario */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 10px; /* Ajusta según sea necesario */
+    left: 50%;
+    transform: translateX(-50%);
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+}
+
+/* Estilos para la barra de desplazamiento */
+.modal-content::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra de desplazamiento */
+    
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: #858383; /* Color de fondo de la pista de desplazamiento */
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: #007bff; /* Color de la barra de desplazamiento */
+    border-radius: 10px; /* Redondear las esquinas de la barra de desplazamiento */
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: #007bff; /* Color de la barra de desplazamiento cuando se pasa el cursor por encima */
+}
+
+/* Ocultar las flechas de desplazamiento */
+.modal-content::-webkit-scrollbar-button {
+    display: none;
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: left;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .custom-line {
+  border: none;
+  height: 2px;
+  background-color: #000;
+  margin: 10px 0;
+}
+
+.modal-message {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en pantalla */
+    z-index: 9999; /* Siempre encima */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    background-color: rgba(0, 0, 0, 0); /* Fondo semi-transparente */
+    display: flex; /* Usar flexbox para centrar contenido */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.modal-message-content {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.85);
+    border-radius: 2rem;
+    text-align: center; /* Centra el texto */
+    position: relative; /* Para que el botón de cerrar se posicione correctamente */
+    left: 5%;
+    margin-top: 40px;
+}
+
+.close-message-modal {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 45px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-message-modal:hover,
+.close-message-modal:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-message-content img {
+    display: block; /* Asegura que la imagen se muestre como bloque */
+    margin: 20px auto 0; /* Margen superior para separación, centrado horizontalmente */
+    max-width: 100%; /* Se ajusta al ancho del contenedor */
+    height: auto; /* Mantiene la relación de aspecto */
+}
+
+
+p {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 25px;
+}
+
+
+     
+
+/* Media query para pantallas de ancho máximo 991px */
+@media (max-width: 991px) {
+
+
+        .botonera{
+        display: flex; /* Usa flexbox para alinear elementos */
+        flex-direction: column; /* Alinea los elementos en una columna */
+        justify-content: center; /* Centra horizontalmente los elementos */
+        align-items: center; /* Centra verticalmente los elementos */
+        height: 10rem; /* Ajusta la altura según tu diseño */
+        margin-top: 130px;
+    }
+        .botonera button{
+        background-color: #1786C3;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 20px;
+        
+
+    }
+    #background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.6; /* Opacidad del video */
+    z-index: 0; /* Asegura que el video esté detrás del texto */
+    height: 6.5rem;
+}
+    .menu {
+        height: 1.2rem;
+    }
+    .menu.container.scrolled {
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 1.2rem;
+}
+    .menu label {
+        display: initial;
+    }
+    .menu img.menu {
+        width: 50px; /* Ancho ajustado para dispositivos móviles */
+        height: auto; /* Altura automática */
+        margin-left: -1.2rem;
+        margin-top: 0.4rem;
+    }
+    .menu.container.scrolled img.menu{
+        width: 50px; /* Ancho ajustado para dispositivos móviles */
+        height: auto; /* Altura automática */
+        margin-left: -1.2rem;
+        margin-top: 0.4rem;
+    }
+    .menu .navbar {
+    position: fixed;
+    flex-direction: column;
+    top: 0;
+    left: -100%; /* Inicialmente fuera de la pantalla a la izquierda */
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: left 0.5s ease;
+    z-index: 1000;
+}
+
+
+
+#menu:checked ~ .navbar {
+    left: 0; /* Muestra el menú desplazándolo desde la izquierda */
+}
+
+.navbar ul {
+    flex-direction: column; /* Alinea los elementos del menú en columna */
+    margin-top: 20px; /* Espacio superior */
+    padding: 0;
+    text-align: center;
+}
+.navbar a{
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 0.3s;
+    line-height: 1;
+    width: 8rem;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.navbar img {
+display: block; /* Asegura que la imagen se comporte como un bloque */
+margin: 0 auto; /* Centra la imagen horizontalmente */
+max-width: 100%; /* Ajusta el tamaño máximo de la imagen */
+height: auto; /* Ajusta la altura automáticamente para mantener la proporción */
+}
+
+.menu .navbar ul {
+    list-style-type: none; /* Quita los estilos de lista */
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.menu .navbar ul li {
+    width: 100%; /* Ancho completo del elemento de lista */
+    text-align: center; /* Centra el texto dentro de los elementos de lista */
+}
+
+.menu .navbar ul li a {
+        display:inline-block;
+        text-decoration: none;
+        color: #fff;
+        transition: background-color 0.3s;
+        line-height: 1; /* Ajustar line-height al tamaño del texto */
+        padding: 0.5rem;
+    }
+
+.menu .navbar ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente al pasar el mouse */
+}
+
+.menu .navbar a:active {
+    color: #ffffff; /* Color del texto activo */
+}
+.logo {
+    display: none;
+}
+h1 {
+  text-align: center;
+  font-size: 3em;
+  margin-top: 3rem;
+}
+.header {
+        min-height: 20vh;
+        height: 12rem;
+    }
+.header-content {
+    
+    flex-direction: column;
+    text-align: center;
+}
+.header-txt {
+    margin-bottom: 25px;
+    
+}
+.header-txt h1{
+    margin: 0px;
+    
+}
+.header-txt span{
+    margin: 0px; 
+}
+
+.header h1 {
+    text-align: center;
+    margin-top: 6rem;
+}
+
+.container-map {
+    margin: 0 auto;
+    padding: 20px;
+    display: block;
+}
+#map{
+    width: 20rem;
+    height: 20rem; /* Ajusta la altura según tus necesidades */
+    margin: auto;
+}
+
+.container-map .text {
+    background-color: #f2f2f2; /* Fondo gris más claro */
+    width: 17.5rem;
+    margin: auto;
+    margin-top: 1rem;
+}
+
+.container-map .text h2,
+.container-map .text h3 {
+    margin-bottom: 8px; /* Espaciado inferior más pequeño */
+}
+
+.container-map .text h3 {
+    margin-top: 15px; /* Espaciado superior más pequeño para subtítulos */
+    }
+
+.footer {
+    padding: 15px; /* Ajusta el padding del footer */
+}
+
+.footer h2 {
+    font-size: 1.5em; /* Reduce el tamaño del título */
+}
+
+.linkredes {
+    margin-bottom: 15px; /* Reduce el margen inferior */
+}
+
+.linkredes a {
+    width: 24px; /* Reduce el tamaño de los iconos de redes sociales */
+    height: 24px;
+}
+
+.footer-txt p {
+    font-size: 0.8em; /* Reduce el tamaño del texto */
+}
+
+.footer-txt hr {
+    width: 40%; /* Reduce la anchura de la línea horizontal */
+}
+
+.btn-wsp {
+    bottom: 10px; /* Reduce el espacio desde la parte inferior */
+    right: 10px; /* Reduce el espacio desde la parte derecha */
+    padding: 8px; /* Ajusta el padding del botón */
+}
+
+.btn-wsp img {
+    width: 80px; /* Reduce el tamaño de la imagen */
+    height: 80px;
+}
+
+.blog.container p {
+    margin-top: -140px;
+}
+
+.blog-txt {
+    margin-top: 150px;
+}
+
+.blog-1 {
+    margin-bottom: 15px;
+}
+
+.botonera {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 10rem;
+    margin-top: 13rem;
+  }
+
+  p {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 20px;
+  margin-top: 35px;
+}
+}
+@media only screen and (min-width: 1920px) {
+    .header h1 {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(0, 0, 0);
+  font-size: 3em;
+  text-align: center;
+  z-index: 1;
+}
+.header {
+  position: relative;
+  height: 35vh;
+  margin-bottom: 6rem;
+}
+
+}
+
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <video autoplay muted loop id="background-video">
+            <source src="imagenes/Agregar texto (1).mp4" type="video/mp4">
+            Tu navegador no soporta la reproducción de video.
+        </video>
+        <h1>Contactate con nosotros</h1>
+    </div>
+<div class="botonera">
+
+<!-- CONTRATA SERVICIO-->
+<button id="contacto-Otro">Contratar un servicio</button>
+<div id="modalOtroForm" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Contratar un servicio</h2>
+        <hr class="custom-line">
+        <form action="https://formspree.io/f/manwdpoq" method="post" enctype="multipart/form-data" class="form">
+            <div class="form-group">
+                <label for="name">Nombre completo:</label>
+                <input type="text" id="name" name="name" pattern="[A-Za-z\s]+" title="Solo letras y espacios permitidos" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Teléfono:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="service">Servicio deseado:</label>
+                <select id="service" name="service" required>
+                    <option value="" selected>Seleccione un servicio</option>
+                    <option value="seguridad_eventos">Seguridad empresarial</option>
+                    <option value="instalacion_camaras">Instalación de cámaras de seguridad</option>
+                    <option value="limpieza">Servicio de limpieza</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Mensaje adicional:</label>
+                <textarea id="message" name="message" rows="5"></textarea>
+            </div>
+            <button type="submit">Enviar solicitud</button>
+        </form>
+        <div id="message-modal" class="modal-message" style="display:none;">
+            <div class="modal-message-content">
+                <span class="close-message-modal">&times;</span>
+                <p id="form-message"></p>
+                <img id="success-image" src="imagenes/Logo-removebg-preview.png" alt="Success" style="display:none; max-width: 100%; height: auto;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TRABAJA CON NOSOTROS-->
+<button id="contacto-Contratar">Trabaja con nosotros</button>
+<div id="modalForm" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Trabaja con nosotros</h2>
+        <hr class="custom-line">
+        <form action="https://formspree.io/f/mrbzadwk" method="post" enctype="multipart/form-data" class="form">
+            <div class="form-group">
+                <label for="name">Nombre completo:</label>
+                <input type="text" id="name" name="name" pattern="[A-Za-z\s]+" title="Solo letras y espacios permitidos" required>
+            </div>            
+            <div class="form-group">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Teléfono:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="position">Puesto al que aplica:</label>
+                <select id="service" name="service" required>
+                    <option value="" selected>Seleccione un servicio</option>
+                    <option value="seguridad_eventos">Seguridad empresarial</option>
+                    <option value="instalacion_camaras">Instalación de cámaras de seguridad</option>
+                    <option value="limpieza">Servicio de limpieza</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Mensaje adicional:</label>
+                <textarea id="message" name="message" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="cv">Adjuntar currículum:</label>
+                <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required>
+            </div>
+            <button type="submit">Enviar solicitud</button>
+        </form>
+        <div id="message-modal" class="modal-message" style="display:none;">
+            <div class="modal-message-content">
+                <span class="close-message-modal">&times;</span>
+                <p id="form-message"></p>
+                <img id="success-image" src="imagenes/Logo-removebg-preview.png" alt="Success" style="display:none; max-width: 100%; height: auto;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CONTACTO-->
+<button id="contacto-Otro2">Contactar</button>
+<div id="modalOtroForm2" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>SeguryRaf</h2>
+        <hr class="custom-line">
+        <form action="https://formspree.io/f/manwdpoq" method="post" enctype="multipart/form-data" class="form">
+            <div class="form-group">
+                <label for="name">Nombre completo:</label>
+                <input type="text" id="name" name="name" pattern="[A-Za-z\s]+" title="Solo letras permitidas" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Asunto del mensaje:</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Mensaje:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit">Enviar Solicitud</button>
+        </form>
+        <div id="message-modal" class="modal-message" style="display:none;">
+            <div class="modal-message-content">
+                <span class="close-message-modal">&times;</span>
+                <p id="form-message"></p>
+                <img id="success-image" src="imagenes/Logo-removebg-preview.png" alt="Success" style="display:none; max-width: 100%; height: auto;">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+    <div class="menu container">
+        <input type="checkbox" id="menu">
+        <label for="menu" class="no_display_en_desk">
+            <img src="imagenes/logo.webp" class="menu" alt="Menú">
+        </label>
+        <nav class="navbar">
+            <a href="index.html">
+                <img src="imagenes/Logo-removebg-preview.png" class="logo-cabeza" alt="Logo">
+            </a>  
+            <ul>
+                <li><a href="index.html" onclick="closeMenu()"> Noticias</a></li>
+                <li><a href="historia.html" onclick="closeMenu()"> Historia</a></li>
+                <li><a href="servicios.html" onclick="closeMenu()"> Servicios</a></li>
+                <li><a href="contactoDirecto.html" onclick="closeMenu()"> Contacto</a></li>
+                <li><a href="clientes.html" onclick="closeMenu()">Clientes</a></li>
+            </ul>
+        </nav>
+    </div>
+    <h1>¿Dónde estamos ubicados? </h1>
+      <div class="container-map">
+        <div id="map">
+            <gmp-map center="-31.254730224609375,-61.48515319824219" zoom="14" map-id="DEMO_MAP_ID">
+                <gmp-advanced-marker position="-31.254730224609375,-61.48515319824219" title="My location"></gmp-advanced-marker>
+              </gmp-map>
+        </div>
+        <div class="text">
+            <h2>Nuestras oficinas</h2>
+                <h3>Oficina Administrativa</h3>
+                 - Belgrano 606, Rafaela <br><br>
+                 - Celular +54 9 3492 410336
+                <h3>Oficina Operativa</h3>
+                 - Belgrano 741, Rafaela <br><br>
+                 - Celular +54 9 3492 681340
+                <h3>Recursos Humanos</h3>
+                 - Celular +54 9 3492 276468
+        </div>
+    </div>
+  </body>
+</html>
+
+
+    <footer class="footer container" id="contacto">
+        <h2>Nuestras redes</h2>
+        <div class="linkredes">
+            <a href="https://www.facebook.com/seguryrafsrl?mibextid=ZbWKwL" class="ig" target="_blank"> <img src="imagenes/logo facebook.png" alt=""></a> 
+            <a href="https://www.instagram.com/seguryrafsrl?igsh=ejYweXl1aDE1YnB3" class="fb" target="_blank"> <img src="imagenes/logo instagram.png" alt=""></a> 
+            <a href="https://www.linkedin.com/in/seguryraf-srl-77a606320/" class="twt" target="_blank"> <img src="imagenes/logo linkedin.png" alt=""></a> 
+        </div>
+
+        <div class="footer-txt">
+            <p>
+                <hr>
+                Copyright 2024 © - SolBot - Diseño y Desarrollo Web
+            </p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/543492681340" class="btn-wsp" target="_blank">
+        <img src="imagenes/wpp.webp" alt="WhatsApp">
+    </a>
+    <script src="js/menu.js"></script> <!-- Asegúrate de enlazar tu archivo JavaScript -->
+    <script>
+        document.getElementById('contacto-Contratar').addEventListener('click', function() {
+            document.getElementById('modalForm').style.display = 'block';
+        });
+        
+        document.getElementById('contacto-Otro').addEventListener('click', function() {
+            document.getElementById('modalOtroForm').style.display = 'block';
+        });
+
+        document.getElementById('contacto-Otro2').addEventListener('click', function() {
+            document.getElementById('modalOtroForm2').style.display = 'block';
+        });
+
+        document.querySelectorAll('.close').forEach(function(closeButton) {
+            closeButton.addEventListener('click', function() {
+                closeButton.parentElement.parentElement.style.display = 'none';
+            });
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target == document.getElementById('modalForm')) {
+                document.getElementById('modalForm').style.display = 'none';
+            }
+        }
+    )
+    </script>
+    <script>
+        document.querySelectorAll('.form').forEach((form) => {
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        const action = this.action;
+        
+        try {
+            const response = await fetch(action, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            let message = '';
+            const showSuccessImage = response.ok;
+            
+            if (response.ok) {
+                message = "Formulario enviado con éxito.";
+            } else {
+                message = "Hubo un problema al enviar el formulario.";
+            }
+            
+            const modalMessage = this.parentNode.querySelector('.modal-message');
+            const formMessage = modalMessage.querySelector('#form-message');
+            const successImage = modalMessage.querySelector('#success-image');
+            
+            formMessage.textContent = message;
+            successImage.style.display = showSuccessImage ? 'block' : 'none';
+            modalMessage.style.display = 'block';
+        } catch (error) {
+            console.error("Error al enviar el formulario:", error);
+        }
+    });
+});
+
+document.querySelectorAll('.close-message-modal').forEach((closeBtn) => {
+    closeBtn.addEventListener('click', function() {
+        this.closest('.modal-message').style.display = 'none';
+    });
+});
+
+
+    </script>
+</body>
+</html>

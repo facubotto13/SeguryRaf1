@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeguryRaf</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" href="imagenes/imagen noticia 1.png"> <!-- Reemplazar esto con el logo de SeguryRaf -->
+</head>
+<body>
+
+    <header class="header">
+        <div class="menu container">
+            <input type="checkbox" id="menu">
+            <label for="menu" class="no_display_en_desk">
+                <img src="imagenes/logo.webp" class="menu" alt="Menú">
+            </label>
+            <nav id="hamburguermenu" class="navbar">
+                <a href="index.html">
+                    <img src="imagenes/Logo-removebg-preview.png" class="logo-cabeza" alt="Logo">
+                </a>  
+                <ul>
+                    <li><a href="#noticias" class="nav-link">Noticias</a></li>
+                    <li><a href="historia.html" onclick="closeMenu()">Historia</a></li>
+                    <li><a href="servicios.html" onclick="closeMenu()">Servicios</a></li>
+                    <li><a href="contactoDirecto.html" onclick="closeMenu()">Contacto</a></li>
+                    <li><a href="clientes.html" onclick="closeMenu()">Clientes</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+
+    <section class="blog container" id="noticias">
+        <h2>Nuevas noticias</h2>
+        <h3>
+            Descubrí nuestras últimas noticias y actualizaciones.
+        </h3>
+        <div class="blog-content">
+            <div class="blog-1 swiper-container">
+                <!-- NOTICIA  1-->
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="service-imagen-container">
+                            <img src="imagenes/imagen noticia 3.jpg" alt="" class="service-imagen">
+                            <img src="imagenes/mas.png" class="mas">
+                        </div>
+                        <div class="blog-txt">
+                            <p>Compromiso con la Excelencia: Capacitaciones Internas para Nuestro Equipo</p>
+                            <a href="#" class="btn-4" data-modal="modal1">Leer más</a>
+                        </div>
+                    </div>
+                    
+                    <!--<div class="swiper-slide">
+                        <img src="imagenes/img4.jpg" alt="" class="service-imagen">
+                        <div class="blog-txt">
+                            <p>Instalación Cámaras de Seguridad</p>
+                            <a href="#" class="btn-4" data-modal="modal1">Leer más</a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="imagenes/img7.jpeg" alt="" class="service-imagen">
+                        <div class="blog-txt">
+                            <p>Instalación Cámaras de Seguridad</p>
+                            <a href="#" class="btn-4" data-modal="modal1">Leer más</a>
+                        </div>
+                    </div> -->
+                    
+                    <!-- Agrega más elementos swiper-slide según necesites -->
+                </div>
+                <!-- DESCOMENTAR ESTO PARA TENER LA FUNCION DE LAS FELCHAS EN EL CASO DE VARIAS IMAGENES
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                -->
+            </div>
+            <!-- NOTICIA  2-->
+            <div class="blog-1 swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="service-imagen-container">
+                        <img src="imagenes/imagen noticia 2.jpg" alt="" class="service-imagen">
+                        <img src="imagenes/mas.png" class="mas">
+                    </div>
+                        <div class="blog-txt">
+                            <p>Nuestra Presencia en Redes Sociales: Conectate con nosotros</p>
+                            <a href="#" class="btn-4" data-modal="modal2">Leer más</a>
+                        </div>
+                    </div>
+                    <!--<div class="swiper-slide">
+                        <img src="imagenes/img8.jpeg" alt="" class="service-imagen">
+                        <div class="blog-txt">
+                            <p>Custodia</p>
+                            <a href="#" class="btn-4" data-modal="modal2">Leer más</a>
+                        </div>
+                    </div> -->
+                    <!-- Agrega más elementos swiper-slide según necesites -->
+                </div>
+            </div>
+            <!-- NOTICIA  3-->
+            
+            <div class="blog-1 swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="service-imagen-container"></div>
+                        <img src="imagenes/imagen noticia 1.png" alt="" class="service-imagen">
+                        <img src="imagenes/mas.png" class="mas">
+                    </div>
+                        <div class="blog-txt">
+                            <p>Seguridad y Limpieza: La Solución Integral para Empresas</p>
+                            <a href="#" class="btn-4" data-modal="modal3">Leer más</a>
+                        </div>
+                    </div>
+                    <!-- Agrega más elementos swiper-slide según necesites -->
+                </div>
+            </div>
+        </div>
+        <!--<button id="toggle-ver" onclick="mostrarMas()">Ver más</button>  EN EL CASO DE ACTIVARLO, TAMBIEN HAY QUE DESCOMENTAR EL JAVA -->
+    </section>
+                            <!-- Modales-->
+    <!-- Modal 1 -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <img src="imagenes/imagen noticia 3.jpg" alt="" class="service-imagen-Modulo1">
+            <h2>Compromiso con la excelencia: Capacitaciones internas para nuestro equipo</h2>
+            <p>
+                En nuestra empresa, entendemos que la clave para ofrecer un servicio de seguridad y limpieza de calidad radica en la <strong>continua formación</strong> y <strong>desarrollo</strong> de nuestro equipo. Por ello, realizamos constantes <strong>capacitaciones internas</strong> para nuestros empleados, asegurándonos de que estén siempre actualizados con las últimas técnicas y conocimientos en el sector.
+            </p>
+            <p>
+                Estas capacitaciones abarcan una amplia gama de temas, desde <strong>nuevas tecnologías de seguridad</strong> y <strong>procedimientos de vigilancia</strong> hasta <strong>técnicas avanzadas de limpieza</strong> y mantenimiento. Nuestro objetivo es que cada miembro del equipo tenga las habilidades y conocimientos necesarios para brindar un servicio de excelencia a nuestros clientes.
+            </p>
+            <p>
+                Además, las capacitaciones fomentan un ambiente de trabajo <strong>colaborativo y motivador</strong>, donde los empleados se sienten valorados y apoyados en su desarrollo profesional. Creemos firmemente que invertir en nuestro equipo es <strong>invertir en la satisfacción y seguridad</strong> de nuestros clientes.
+            </p>
+            <p>
+                Con estas iniciativas, reafirmamos nuestro compromiso de mantenernos a la vanguardia en el sector y de ofrecer <strong>soluciones integrales</strong> que superen las expectativas de quienes confían en nosotros.
+            </p>
+        </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <img src="imagenes/imagen noticia 2.jpg" alt="" class="service-imagen-Modulo1">
+            <h2>Nuestra presencia en redes sociales: <strong>Conectate</strong> con nosotros.</h2>
+            <p>
+                Nos complace anunciar que ahora podes encontrarnos en las principales <strong>redes sociales</strong>. Como parte de nuestro compromiso de mantener una comunicación abierta y accesible con nuestros clientes y el público en general, hemos expandido nuestra presencia a <strong>Facebook</strong>, <strong>Instagram</strong> y <strong>LinkedIn</strong>.
+            </p>
+            <p>
+                En <strong>Facebook</strong>, compartimos las últimas novedades sobre nuestros servicios, así como <strong>consejos</strong> y <strong>noticias relevantes</strong> del sector de la seguridad empresarial. Seguinos en Facebook para estar al tanto de todas nuestras actualizaciones y participar en nuestras <strong>discusiones</strong>.
+            </p>
+            <p>
+                <strong>Instagram</strong> es el lugar donde podrás ver en acción nuestros servicios. A través de <strong>fotos</strong> y <strong>videos</strong>, mostramos cómo trabajamos para garantizar la seguridad y limpieza en las empresas. Seguinos en Instagram y no te pierdas nuestras <strong>historias</strong> y publicaciones diarias.
+            </p>
+            <p>
+                <strong>LinkedIn</strong> es nuestra plataforma para conectarnos con <strong>profesionales</strong> y <strong>empresas</strong>. Aquí compartimos <strong>artículos informativos</strong>, <strong>casos de éxito</strong> y <strong>oportunidades de negocio</strong>. Unite a nuestra red en LinkedIn para colaborar y crecer juntos en el ámbito profesional.
+            </p>
+            <p>
+                Estamos emocionados de <strong>conectarnos con vos</strong> en estas plataformas y seguir construyendo <strong>relaciones sólidas y significativas</strong>. ¡Seguinos hoy mismo!
+            </p>
+        </div>
+    </div>
+
+    <!-- Modal 3 -->
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <img src="imagenes/imagen noticia 1.png" alt="" class="service-imagen-Modulo1">            
+            <h2>Seguridad y limpieza: La <strong>solución integral</strong> para empresas.</h2>
+            <p>
+                Somos una <strong>Agencia Privada</strong> especializada en <strong>Seguridad</strong>, <strong>Vigilancia</strong> e <strong>Informes</strong>. Con un enfoque integral y personalizado, esta empresa no solo ofrece servicios de vigilancia y protección, sino que también se destaca por su capacidad para proporcionar <strong>informes detallados</strong> que ayudan a sus clientes a mantenerse un paso adelante en la prevención de incidentes.
+            </p>
+            <p>
+                Además de su experiencia en seguridad, la compañía amplía su oferta con la <strong>instalación de cámaras de seguridad</strong> de última generación, garantizando así una <strong>cobertura total y continua</strong>. La atención al detalle y el compromiso con la excelencia se reflejan también en su <strong>servicio de limpieza profesional</strong>, asegurando que los espacios no solo sean seguros, sino también <strong>impecables</strong>.
+            </p>
+            <p>
+                La empresa ofrece un <strong>servicio de limpieza integral</strong> que incluye desde la limpieza regular hasta la <strong>desinfección profunda</strong>, adaptándose a las necesidades específicas de cada cliente. Con una combinación única de servicios y un equipo <strong>altamente capacitado</strong>, esta nueva agencia se posiciona como una opción <strong>confiable y eficiente</strong> para las empresas que buscan proteger sus activos y mantener un entorno seguro y limpio.
+            </p>
+        </div>
+    </div>
+
+    <!-- Modal 4 
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <img src="imagenes/img4.jpg" alt="" class="service-imagen-Modulo1">
+            <h2>Instalación Cámaras de Seguridad</h2>
+            <p>
+                Contenido del modal 4...
+            </p>
+        </div>
+    </div>
+
+     Modal 5 
+    <div id="modal5" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <img src="imagenes/img12.jpeg" alt="" class="service-imagen-Modulo1">
+            <h2>Instalación Cámaras de Seguridad</h2>
+            <p>
+                Contenido del modal 5...
+            </p>
+        </div>
+    </div>
+-->
+    <footer class="footer container" id="contacto">
+        <h2>Nuestras redes</h2>
+        <div class="linkredes">
+            <a href="https://www.facebook.com/seguryrafsrl?mibextid=ZbWKwL" class="ig" target="_blank"> <img src="imagenes/logo facebook.png" alt=""></a> 
+            <a href="https://www.instagram.com/seguryrafsrl?igsh=ejYweXl1aDE1YnB3" class="fb" target="_blank"> <img src="imagenes/logo instagram.png" alt=""></a> 
+            <a href="https://www.linkedin.com/in/seguryraf-srl-77a606320/" class="twt" target="_blank"> <img src="imagenes/logo linkedin.png" alt=""></a> 
+        </div>
+        <div class="footer-txt">
+            <p>
+                <hr>
+                Copyright 2024 © - SolBot - Diseño y Desarrollo Web
+            </p>
+
+        </div>
+    </footer>
+
+    <a href="https://wa.me/543492681340" class="btn-wsp" target="_blank">
+        <img src="imagenes/wpp.webp" alt="WhatsApp">
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="js/menu.js"></script>
+</body>
+</html>
